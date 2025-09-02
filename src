@@ -1,0 +1,26 @@
+package com.example.web;
+
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+public class HelloServlet extends HttpServlet {
+   @Override
+   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      resp.setContentType("text/html;charset=UTF-8");
+      String host = System.getenv().getOrDefault("HOSTNAME", "unknown");
+      String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+      resp.getWriter().println("<!doctype html><html><head><title>Hello</title></head><body>");
+      resp.getWriter().println("<h1>MyApp says hello 👋</h1>");
+      resp.getWriter().println("<p>Handled by container: " + host + "</p>");
+      resp.getWriter().println("<p>Time: " + time + "</p>");
+      resp.getWriter().println("<p><a href='/'>&larr; Home</a></p>");
+      resp.getWriter().println("</body></html>");
+   }
+}

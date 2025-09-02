@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+   web:
+     image: localhost:5000/myapp:1.0
+     ports:
+       - "5685:8080"
+     deploy:
+        replicas: 5
+        restart_policy:
+          condition: on-failure
+        update_config:
+            parallelism: 2
+            delay: 5s
